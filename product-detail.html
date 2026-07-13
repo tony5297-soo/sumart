@@ -2466,9 +2466,15 @@ const sticky=document.getElementById('stickyBuy');addEventListener('scroll',()=>
       nav.querySelectorAll('.sx-cat-link').forEach(function(link){
         var href=link.getAttribute('href')||'';
         var text=(link.textContent||'').trim();
-        if((location.pathname.endsWith('today-deal.html') && href.indexOf('today-deal.html')>-1) ||
-           (location.pathname.endsWith('coupon.html') && href.indexOf('coupon.html')>-1)){
+        var currentFile=location.pathname.split('/').pop()||'index.html';
+        var target=new URL(href,location.href);
+        var targetFile=target.pathname.split('/').pop();
+        var samePage=targetFile===currentFile;
+        var sameCategory=targetFile!=='ai-search.html' ||
+          target.searchParams.get('category')===new URLSearchParams(location.search).get('category');
+        if(samePage && sameCategory){
           link.classList.add('is-current');
+          link.setAttribute('aria-current','page');
         }
         link.addEventListener('click',function(){
           try{localStorage.setItem('sumartLastCategory',text);}catch(e){}

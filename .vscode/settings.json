@@ -1,4 +1,6 @@
 {
   "workbench.activityBar.location": "default",
-  "git.enabled": true
+  "workbench.statusBar.visible": true,
+  "git.enabled": true,
+  "liveServer.settings.showOnStatusbar": true
 }
