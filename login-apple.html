@@ -886,7 +886,7 @@ body.sx-category-sheet-open .sx-category-sheet{transform:translate(-50%,0)}
     document.body.appendChild(menu);document.body.appendChild(launcher);document.body.appendChild(dock);document.body.appendChild(feedClose);
 
     function count(keys,fallback){for(var i=0;i<keys.length;i++){var v=parseInt(localStorage.getItem(keys[i])||'',10);if(Number.isFinite(v))return v}return fallback||0}
-    function update(){var w=count(['sumartWishlistCount','wishlistCount','wishCount'],3),c=count(['sumartCartCount','cartCount'],3);dock.querySelector('.wish-badge').textContent=w>99?'99+':w;dock.querySelector('.cart-badge').textContent=c>99?'99+':c}
+    function update(){var w=count(['sumart.wishlist.count','sumartWishlistCount','wishlistCount','wishCount'],3),c=count(['sumartCartCount','cartCount'],3);dock.querySelector('.wish-badge').textContent=w>99?'99+':w;dock.querySelector('.cart-badge').textContent=c>99?'99+':c}
     function setMenu(open){document.body.classList.toggle('v379-ai-open',open);launcher.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-hidden',String(!open))}
     function setFeed(open){document.body.classList.toggle('v379-feed-open',open);if(open)setMenu(false);var feed=document.querySelector('.sumart-x-live-stream');if(feed)feed.setAttribute('aria-hidden',String(!open))}
     launcher.addEventListener('click',function(){setMenu(!document.body.classList.contains('v379-ai-open'))});

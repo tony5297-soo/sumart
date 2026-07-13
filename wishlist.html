@@ -2316,20 +2316,24 @@ body.sx-category-sheet-open .sx-category-sheet{transform:translate(-50%,0)}
     document.querySelectorAll('.fab,.sumart-ai-fab,.sumart-v4-floating,.sumart-floating-stack,#sumart-floating-stack,.sumart-s9-floating,.sumart-v4134-float-dock,.v501-floating-dock').forEach(function(el){ el.remove(); });
     document.querySelectorAll('.sumart-v5011-dock').forEach(function(el){ el.remove(); });
     var cartCount=localStorage.getItem('sumart_cart_count') || localStorage.getItem('cartCount') || '3';
+    var headerWishBadge=document.querySelector('.header-actions [data-link="wishlist.html"] .badge,.header-actions [href="wishlist.html"] .badge,[data-sx-wish-count]');
+    var wishCount=(headerWishBadge && headerWishBadge.textContent.trim()) || localStorage.getItem('sumart.wishlist.count') || localStorage.getItem('sumartWishlistCount') || localStorage.getItem('wishlistCount') || localStorage.getItem('wishCount') || '3';
     var dock=document.createElement('nav');
     dock.className='sumart-v5011-dock';
     dock.setAttribute('aria-label','SUMART 빠른 실행');
     dock.innerHTML='<div class="sumart-v5011-dock-card">'
       + '<a class="sumart-v5011-dock-btn sumi" href="ai-concierge.html" aria-label="SUMI AI"><span class="orb">✨</span><strong>SUMI AI</strong><span class="sumart-v5011-tip">SUMI AI 상담</span></a>'
-      + '<a class="sumart-v5011-dock-btn wish" href="wishlist.html" aria-label="찜"><span>♥</span><span class="sumart-v5011-tip">찜 상품</span></a>'
+      + '<a class="sumart-v5011-dock-btn wish" href="wishlist.html" aria-label="찜"><span>♥</span><span class="sumart-v5011-badge sumart-v5011-wish-badge">'+(Number(wishCount)>99?'99+':wishCount)+'</span><span class="sumart-v5011-tip">찜 상품</span></a>'
       + '<a class="sumart-v5011-dock-btn cart" href="cart-order.html" aria-label="장바구니"><span>🛒</span><span class="sumart-v5011-badge">'+cartCount+'</span><span class="sumart-v5011-tip">장바구니</span></a>'
       + '<button class="sumart-v5011-dock-btn top" type="button" aria-label="맨 위로"><span>↑</span><span class="sumart-v5011-tip">TOP</span></button>'
       + '</div>';
     document.body.appendChild(dock);
     var top=dock.querySelector('.top');
     if(top){ top.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); }); }
-    var badge=dock.querySelector('.sumart-v5011-badge');
+    var badge=dock.querySelector('.cart .sumart-v5011-badge');
     if(badge && String(cartCount)==='0') badge.style.display='none';
+    var wishBadge=dock.querySelector('.sumart-v5011-wish-badge');
+    if(wishBadge && String(wishCount)==='0') wishBadge.style.display='none';
   });
 })();
 </script>
@@ -3476,7 +3480,7 @@ body.sx-category-sheet-open .sx-category-sheet{transform:translate(-50%,0)}
     document.body.appendChild(menu);document.body.appendChild(launcher);document.body.appendChild(dock);document.body.appendChild(feedClose);
 
     function count(keys,fallback){for(var i=0;i<keys.length;i++){var v=parseInt(localStorage.getItem(keys[i])||'',10);if(Number.isFinite(v))return v}return fallback||0}
-    function update(){var w=count(['sumartWishlistCount','wishlistCount','wishCount'],3),c=count(['sumartCartCount','cartCount'],3);dock.querySelector('.wish-badge').textContent=w>99?'99+':w;dock.querySelector('.cart-badge').textContent=c>99?'99+':c}
+    function update(){var w=count(['sumart.wishlist.count','sumartWishlistCount','wishlistCount','wishCount'],3),c=count(['sumartCartCount','cartCount'],3);dock.querySelector('.wish-badge').textContent=w>99?'99+':w;dock.querySelector('.cart-badge').textContent=c>99?'99+':c}
     function setMenu(open){document.body.classList.toggle('v379-ai-open',open);launcher.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-hidden',String(!open))}
     function setFeed(open){document.body.classList.toggle('v379-feed-open',open);if(open)setMenu(false);var feed=document.querySelector('.sumart-x-live-stream');if(feed)feed.setAttribute('aria-hidden',String(!open))}
     launcher.addEventListener('click',function(){setMenu(!document.body.classList.contains('v379-ai-open'))});
