@@ -1,0 +1,82 @@
+/* SUMART shared visual foundation.
+   Loaded after page styles so legacy pages can share one palette without
+   changing their markup or behaviour. */
+:root {
+  color-scheme: light;
+  --sumart-primary: #ff3b5c;
+  --sumart-primary-hover: #d62845;
+  --sumart-ink: #171827;
+  --sumart-bg: #f8f6f3;
+  --sumart-surface: #ffffff;
+  --sumart-surface-muted: #f3f4f6;
+  --sumart-text: #171821;
+  --sumart-text-muted: #667085;
+  --sumart-border: #e6e8ec;
+  --sumart-gold: #ffb800;
+  --sumart-success: #00a862;
+  --sumart-info: #356fe0;
+  --sumart-purple: #6d3bd1;
+  --sumart-radius-sm: 14px;
+  --sumart-radius-md: 20px;
+  --sumart-radius-lg: 28px;
+  --sumart-shadow-sm: 0 8px 24px rgba(23, 24, 39, .07);
+  --sumart-shadow-md: 0 18px 48px rgba(23, 24, 39, .11);
+
+  /* Legacy aliases used throughout the standalone pages. */
+  --red: var(--sumart-primary);
+  --red-dark: var(--sumart-primary-hover);
+  --navy: var(--sumart-ink);
+  --navy2: #111827;
+  --gold: var(--sumart-gold);
+  --green: var(--sumart-success);
+  --blue: var(--sumart-info);
+  --purple: var(--sumart-purple);
+  --bg: var(--sumart-bg);
+  --text: var(--sumart-text);
+  --muted: var(--sumart-text-muted);
+  --line: var(--sumart-border);
+  --card: var(--sumart-surface);
+  --radius: var(--sumart-radius-lg);
+  --soft: var(--sumart-shadow-sm);
+  --shadow: var(--sumart-shadow-md);
+  --s9-red: var(--sumart-primary);
+  --s9-navy: var(--sumart-ink);
+  --s9-gold: var(--sumart-gold);
+  --s9-line: var(--sumart-border);
+  --v501-red: var(--sumart-primary);
+  --v501-navy: var(--sumart-ink);
+  --v501-gold: var(--sumart-gold);
+  --v501-green: var(--sumart-success);
+  --v501-purple: var(--sumart-purple);
+}
+
+html {
+  background: var(--sumart-bg);
+}
+
+body {
+  color: var(--sumart-text);
+  background-color: var(--sumart-bg);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  color: #fff;
+  background: var(--sumart-primary-hover);
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid rgba(214, 40, 69, .34);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
