@@ -5906,6 +5906,11 @@ body.sx-category-sheet-open .sx-category-sheet{transform:translate(-50%,0)}
     const closeBtn = document.getElementById('sitemap-close');
     const groups = document.querySelectorAll('.sitemap-group');
 
+    // The current category navigation no longer renders the legacy
+    // #allmenu-btn. Its own controller handles .sx-category-menu-btn, so only
+    // initialise this legacy sitemap when every required trigger exists.
+    if (!btn || !overlay || !panel || !closeBtn) return;
+
     function open() {
       overlay.classList.add('open');
       panel.classList.add('open');
